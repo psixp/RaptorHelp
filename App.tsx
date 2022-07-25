@@ -4,7 +4,7 @@ import {useFonts, Roboto_400Regular, Roboto_700Bold} from '@expo-google-fonts/ro
 
 import { THEME } from './src/styles/theme';
 
-import {Register} from './src/screens/Register';
+import {Routes} from './src/routes';
 import {Loading} from './src/components/Loading';
 
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
         translucent={true}
       />
 
-    {fontsLoaded ? <Register /> : <Loading />}
+    {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   );
 }
