@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { HStack, IconButton, VStack, useTheme, Text, Heading, FlatList, Center } from 'native-base';
-import { SignOut } from 'phosphor-react-native';
+import { HStack, IconButton, VStack, useTheme, Text, Heading, FlatList, Center, Icon } from 'native-base';
+import { SignOut, Barcode } from 'phosphor-react-native';
 import { ChatTeardropText } from 'phosphor-react-native';
-
+import { useNavigation } from '@react-navigation/native'
 import Logo from '../assets/logo_secondary.svg'
 
 import { Filter } from '../components/Filter'
@@ -12,11 +12,33 @@ import { Order, OrderProps } from '../components/Order'
 
 export function Home() {
     const { colors } = useTheme();
+    const navigation = useNavigation();
 
     const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open');
     const [orders, setOrders] = useState<OrderProps[]>([
+        {
+            id: "1",
+            patrimony: '12345',
+            when: '24/07/2022 às 19:15',
+            status: 'open',
 
+        },
+        {
+            id: "2",
+            patrimony: '12367',
+            when: '06/07/2022 às 13:45',
+            status: 'closed',
+
+        }
     ]);
+
+    function handleNewOrder() {
+        navigation.navigate('new')
+    }
+
+    function handleOpenDetails(orderId: string) {
+        navigation.navigate('details', { orderId })
+    }
 
     return (
         /*Itens dentro do VStack ficam um ao abaixo do outro */
@@ -39,10 +61,10 @@ export function Home() {
                 {/* Itens dentro do HStack ficam um ao lado do outro */}
                 <HStack w="full" mt={8} mb={4} justifyContent="space-between" alignItems="center">
                     <Heading color="gray.100">
-                        Meus chamados
+                        Solicitações
                     </Heading>
                     <Text color="gray.200">
-                        3
+                        {orders.length > 0 ? orders.length : ''}
                     </Text>
                 </HStack>
                 <HStack space={3} mb={8}>
@@ -64,7 +86,7 @@ export function Home() {
                 <FlatList
                     data={orders}
                     keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => <Order data={item} />}
+                    renderItem={({ item }) => <Order data={item} onPress={() => handleOpenDetails(item.id)} />}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingBottom: 100 }}
                     ListEmptyComponent={() => (
@@ -80,8 +102,8 @@ export function Home() {
                 />
                 <Button title={statusSelected === 'open'
                     ? "Nova solicitação"
-                    : "Solicitações finalizadas"} />
-
+                    : "Solicitações finalizadas"} onPress={handleNewOrder} icon={<Barcode size={30} color="white" />} />
+                    
             </VStack>
 
         </VStack>

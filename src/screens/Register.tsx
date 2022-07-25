@@ -22,7 +22,7 @@ export function Register() {
                 textAlignVertical="top"
             />
 
-            <Button title="Cadastrar"
+            <Button title="Cadastrar" icon
                 mt={5}
             />
         </VStack>
