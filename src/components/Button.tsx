@@ -1,10 +1,14 @@
-import { Button as ButtonNativeBase, IButtonProps, Heading } from 'native-base';
+import { Button as ButtonNativeBase, IButtonProps, Heading, VStack, HStack } from 'native-base';
+
+
 
 type Props = IButtonProps & {
     title: string;
+    icon: any;
 }
 
-export function Button({ title, ...rest }: Props) {
+export function Button({ title, icon="", ...rest }: Props) {
+
     return (
         <ButtonNativeBase
             bg="green.700"
@@ -12,11 +16,27 @@ export function Button({ title, ...rest }: Props) {
             fontSize="sm"
             rounded="sm"
             _pressed={{bg: 'green.600'}}
+            
+
             {...rest}
             >
-            <Heading color="white" fontSize="sm">
+            <HStack
+            justifyContent="space-between"
+            alignItems="center"
+            space={2}
+            >
+            <Heading 
+            color="white" 
+            fontSize="sm" 
+            rounded="sm"
+            overflow="hidden" 
+            alignItems="center"
+            >
                 {title}
-            </Heading>
+                
+            </Heading> 
+                {icon}
+            </HStack>
         </ButtonNativeBase>
     );
 }
