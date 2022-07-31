@@ -3,6 +3,10 @@ import { HStack, IconButton, VStack, useTheme, Text, Heading, FlatList, Center, 
 import { SignOut, Barcode } from 'phosphor-react-native';
 import { ChatTeardropText } from 'phosphor-react-native';
 import { useNavigation } from '@react-navigation/native'
+import auth from '@react-native-firebase/auth';
+import { Alert } from 'react-native';
+
+
 import Logo from '../assets/logo_secondary.svg'
 
 import { Filter } from '../components/Filter'
@@ -33,12 +37,23 @@ export function Home() {
     ]);
 
     function handleNewOrder() {
-        navigation.navigate('new')
+        navigation.navigate('new');
     }
 
     function handleOpenDetails(orderId: string) {
-        navigation.navigate('details', { orderId })
+        navigation.navigate('details', { orderId });
     }
+
+
+    function handleLogout() {
+        auth()
+        .signOut()
+        .catch(error => {
+            console.log(error);
+            Alert.alert('Sair', 'Erro ao sair.');
+        });
+    }
+
 
     return (
         /*Itens dentro do VStack ficam um ao abaixo do outro */
@@ -55,6 +70,7 @@ export function Home() {
                 <Logo />
                 <IconButton
                     icon={<SignOut size={24} color={colors.gray[300]} />}
+                    onPress={handleLogout}
                 />
             </HStack>
             <VStack flex={1} px={6}>
