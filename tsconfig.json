@@ -13,5 +13,5 @@
     "strict": true,
     "target": "esnext"
   },
-  "extends": "expo/tsconfig.base"
+    "extends": "expo/tsconfig.base"
 }

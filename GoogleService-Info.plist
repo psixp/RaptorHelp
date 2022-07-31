@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>301987224975-ejbqdfld1b3a61e2b5dd9gabhvihjvuf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.301987224975-ejbqdfld1b3a61e2b5dd9gabhvihjvuf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCBU-JmegszFhlHZ3RP31yv5fQjgiIsCz0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>301987224975</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.raptorhelp</string>
+	<key>PROJECT_ID</key>
+	<string>raptorhel-afd0d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>raptorhel-afd0d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:301987224975:ios:76a8160ecbf626ec467ffa</string>
+</dict>
+</plist>

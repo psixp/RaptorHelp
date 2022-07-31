@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "301987224975",
+    "project_id": "raptorhel-afd0d",
+    "storage_bucket": "raptorhel-afd0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301987224975:android:86994aa2def0d470467ffa",
+        "android_client_info": {
+          "package_name": "com.raptorhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301987224975-55mnan7re6b8g411toe6bi24qlm0dm5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl410oAGtQMOx67OespzRcVUjCWbs9OyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301987224975-55mnan7re6b8g411toe6bi24qlm0dm5i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "301987224975-ejbqdfld1b3a61e2b5dd9gabhvihjvuf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.raptorhelp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
