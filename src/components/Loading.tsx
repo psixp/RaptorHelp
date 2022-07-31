@@ -8,6 +8,7 @@ export function Loading() {
             <Image
             source={require('../assets/logo-gif_4_semFundo.gif')}
             style={{ width: 50, height: 50 }}
+            alt={"logo-loader"}
              />
         </Center>
     )
