@@ -1,40 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HStack, IconButton, VStack, useTheme, Text, Heading, FlatList, Center, Icon } from 'native-base';
 import { SignOut, Barcode } from 'phosphor-react-native';
 import { ChatTeardropText } from 'phosphor-react-native';
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import { Alert } from 'react-native';
 
+import { dateFormat } from '../utils/firestoreDateFormat';
 
 import Logo from '../assets/logo_secondary.svg'
 
 import { Filter } from '../components/Filter'
 import { Button } from '../components/Button'
-
 import { Order, OrderProps } from '../components/Order'
+import { Loading } from '../components/Loading';
+
+
 
 export function Home() {
-    const { colors } = useTheme();
+    
+    const [isLoading, setLoading] = useState(true);
+    const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open'); /* status do filtro da home default é o filtro open */
+    const [orders, setOrders] = useState<OrderProps[]>([]);
+    
     const navigation = useNavigation();
-
-    const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open');
-    const [orders, setOrders] = useState<OrderProps[]>([
-        {
-            id: "1",
-            patrimony: '12345',
-            when: '24/07/2022 às 19:15',
-            status: 'open',
-
-        },
-        {
-            id: "2",
-            patrimony: '12367',
-            when: '06/07/2022 às 13:45',
-            status: 'closed',
-
-        }
-    ]);
+    const { colors } = useTheme();
 
     function handleNewOrder() {
         navigation.navigate('new');
@@ -47,12 +38,39 @@ export function Home() {
 
     function handleLogout() {
         auth()
-        .signOut()
-        .catch(error => {
-            console.log(error);
-            Alert.alert('Sair', 'Erro ao sair.');
-        });
+            .signOut()
+            .catch(error => {
+                console.log(error);
+                Alert.alert('Sair', 'Erro ao sair.');
+            });
     }
+
+    useEffect(() => {
+        setLoading(true)
+    
+        const subscriber = firestore()
+          .collection('orders')
+          .where('status', '==', statusSelected)
+          .onSnapshot(snapshot => {
+            const data = snapshot.docs.map(doc => {               
+                    const { patrimony, description, status, created_at } = doc.data();
+                    
+              return {
+                id: doc.id,
+                patrimony,
+                description,
+                status,
+                when: dateFormat(created_at)
+              }
+            })
+            
+    
+            setOrders(data)
+            setLoading(false)
+          })
+    
+          return subscriber
+      }, [statusSelected])/* passamos uam dependencia para sempre q isso for alterado o firebase recarregue os filtros */
 
 
     return (
@@ -99,7 +117,9 @@ export function Home() {
                         isActive={statusSelected === 'closed'}
                     />
                 </HStack>
-                <FlatList
+                {   
+                    isLoading ? <Loading /> :
+                    <FlatList
                     data={orders}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => <Order data={item} onPress={() => handleOpenDetails(item.id)} />}
@@ -115,11 +135,11 @@ export function Home() {
                             </Text>
                         </Center>
                     )}
-                />
-                <Button title={statusSelected === 'open'
+                />}
+                <Button title='Nova Solicitação' onPress={handleNewOrder} icon={<Barcode size={30} color="white" />} />
+                {/* title={statusSelected === 'open'
                     ? "Nova solicitação"
-                    : "Solicitações finalizadas"} onPress={handleNewOrder} icon={<Barcode size={30} color="white" />} />
-                    
+                    : "Solicitações finalizadas"} onPress={handleNewOrder} icon={<Barcode size={30} color="white" />}   */}
             </VStack>
 
         </VStack>
