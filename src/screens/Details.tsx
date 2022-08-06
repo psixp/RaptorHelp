@@ -11,7 +11,7 @@ import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Header } from '../components/Header';
 import { OrderProps } from '../components/Order';
-import { OrderFireStoreDTO } from '../DTOs/OrderFirestoreDTO';
+import { OrderFirestoreDTO } from '../DTOs/OrderFirestoreDTO';
 import { Loading } from '../components/Loading';
 import { CardDetails } from '../components/CardDetails';
 
@@ -45,7 +45,7 @@ export function Details() {
     }
 
     firestore()
-      .collection<OrderFireStoreDTO>('orders')
+      .collection<OrderFirestoreDTO>('orders')
       .doc(orderId)
       .update({
         status: 'closed',
@@ -64,13 +64,13 @@ export function Details() {
 
   useEffect(() => {
     firestore()
-      .collection<OrderFireStoreDTO>('orders')
+      .collection<OrderFirestoreDTO>('orders')
       .doc(orderId)
       .get()
       .then(doc => {
-        const { patrimony, description, status, created_at, closed_at, solution } = doc.data()!;
+        const { patrimony, description, status, created_at, closed_at, solution } = doc.data()!
 
-        const closed = closed_at ? dateFormat(closed_at) : undefined;
+        const closed = closed_at ? dateFormat(closed_at) : undefined
 
         setOrder({
           id: doc.id,
